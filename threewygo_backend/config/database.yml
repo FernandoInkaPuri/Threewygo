@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: postgres
+  host: postgres
+
+development:
+  <<: *default
+  database: threewygo_backend_development
+
+test:
+  <<: *default
+  database: threewygo_backend_test
+
+production:
+  <<: *default
+  database: threewygo_backend_production
+  username: threewygo_backend
+  password: <%= ENV["THREEWYGO_BACKEND_DATABASE_PASSWORD"] %>
