@@ -1,7 +1,6 @@
 services:
   threewygo_backend:
     container_name: threewygo_backend
-    working_dir: /threewygo_backend
     build:
       context: ./threewygo_backend
     volumes:
@@ -19,6 +18,15 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
+  threewygo_frontend:
+    container_name: threewygo_frontend
+    build:
+      context: ./threewygo_frontend
+    ports:
+      - "3001:3000"
+    depends_on:
+      - threewygo_backend
+  
 volumes:
   database:  
   rubygems:
