@@ -9,6 +9,8 @@ class Course < ApplicationRecord
   private
   
   def end_date_greater_than_start_date
-    errors.add(:end_date, 'Data de término precisa ser maior que data de início') if start_date > end_date
+    if start_date.present? && end_date.present? && start_date > end_date
+      errors.add(:end_date, 'Data de término precisa ser maior que data de início')
+    end
   end
 end
