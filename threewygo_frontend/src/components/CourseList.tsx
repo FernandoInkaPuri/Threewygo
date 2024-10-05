@@ -1,0 +1,42 @@
+import { Box, Text, SimpleGrid, Spinner } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { CourseType } from '../types/types'; 
+
+
+const CourseList: React.FC = () => {
+  const [courses, setCourses] = useState<CourseType[]>([])
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const { data } = await axios.get<CourseType[]>('http://localhost:3000/courses');
+        setCourses(data);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+        setError('Erro ao carregar cursos.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  if (loading) return <Spinner />;
+  if (error) return <Text color="red.500">{error}</Text>;
+  return (
+    <SimpleGrid columns={[1, null, 2]} spacing={4}>
+      {courses.map((course) => (
+        <Box key={course.id} borderWidth="1px" borderRadius="lg" p={4}>
+          <Text fontWeight="bold">{course.title}</Text>
+          <Text>{course.description}</Text>
+        </Box>
+      ))}
+    </SimpleGrid>
+  );
+};
+
+export default CourseList;
