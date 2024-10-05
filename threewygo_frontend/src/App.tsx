@@ -1,18 +1,18 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import CourseList from './components/CourseList';
 import Course from './components/Course';
 import CourseNew from './components/CourseNew';
 import CourseEdit from './components/CourseEdit';
+import Header from './components/Header';
+
 
 function App() {
   return (
     <Router>
+      <Header />
       <Box p={4}>
-        <Heading as="h1" size="lg" mb={4}>
-          Cursos Ativos
-        </Heading>
         <Routes>
           <Route path="/" element={<CourseList />} />
           <Route path="/course/:id" element={<Course />} />

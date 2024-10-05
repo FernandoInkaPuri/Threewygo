@@ -36,28 +36,35 @@ const Course: React.FC = () => {
     }
   };
 
-  const aspectRatioSize = useBreakpointValue({ base: '100%', md: '90%', lg: '90%' });
   if (!course) return <div>Loading...</div>;
   return (
     <Box p={4}>
-      <Text fontWeight="bold" fontSize="xl">{course.title}</Text>
-      <Text mt={2}>{course.description}</Text>
+      <Text fontWeight="bold" textAlign="center" fontSize="5xl" my="2">{course.title}</Text>
+      <Text textAlign="center" fontSize="3xl" my={2}>{course.description}</Text>
       
       {course.video_urls.length > 0 && (
         <Box mt={4}>
-          <Text fontWeight="bold">Vídeos:</Text>
           {course.video_urls.map((url, index) => {
             const videoId = url.split('v=')[1];
             const embedUrl = `https://www.youtube.com/embed/${videoId.split('&')[0]}`;
             return (
-              <Box key={index} mt={4} display="flex" flexDirection="column" alignItems="center">
-                <Text>Aula {index + 1}:</Text>
-                <AspectRatio ratio={16 / 9} mt={2} width={aspectRatioSize}>
+              <Box 
+                key={index} 
+                borderWidth="1px" 
+                borderRadius="md" 
+                overflow="hidden" 
+                boxShadow="md"
+                width="60%"
+                mx="auto"
+                my={8}
+              >
+                <Text p={2} bg="gray.100" fontWeight="bold">Aula {index + 1}</Text>
+                <AspectRatio ratio={16 / 9}>
                   <iframe 
                     src={embedUrl} 
                     title={`Vídeo ${index + 1}`} 
                     allowFullScreen 
-                    style={{ border: 'none' }}
+                    style={{ border: 'none', width: '100%', height: '100%' }}
                   />
                 </AspectRatio>
               </Box>
