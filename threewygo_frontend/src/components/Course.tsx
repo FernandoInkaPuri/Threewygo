@@ -51,7 +51,7 @@ const Course: React.FC = () => {
             const embedUrl = `https://www.youtube.com/embed/${videoId.split('&')[0]}`;
             return (
               <Box key={index} mt={4} display="flex" flexDirection="column" alignItems="center">
-                <Text>Vídeo {index + 1}:</Text>
+                <Text>Aula {index + 1}:</Text>
                 <AspectRatio ratio={16 / 9} mt={2} width={aspectRatioSize}>
                   <iframe 
                     src={embedUrl} 

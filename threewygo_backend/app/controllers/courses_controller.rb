@@ -10,8 +10,8 @@ class CoursesController < ApplicationController
   end
 
   def create
-    start_date = DateTime.strptime(params[:course][:start_date], '%d/%m/%Y')
-    end_date = DateTime.strptime(params[:course][:end_date], '%d/%m/%Y')
+    start_date = DateTime.parse(params[:course][:start_date])
+    end_date = DateTime.parse(params[:course][:end_date])
 
     @course = Course.new(course_params.merge(start_date: start_date, end_date: end_date))
 
@@ -23,8 +23,8 @@ class CoursesController < ApplicationController
   end
 
   def update
-    start_date = DateTime.strptime(params[:course][:start_date], '%d/%m/%Y')
-    end_date = DateTime.strptime(params[:course][:end_date], '%d/%m/%Y')
+    start_date = DateTime.parse(params[:course][:start_date])
+    end_date = DateTime.parse(params[:course][:end_date])
 
     @course = Course.find(params[:id])
     if @course.update(course_params.merge(start_date: start_date, end_date: end_date))
@@ -51,8 +51,8 @@ class CoursesController < ApplicationController
       id: course.id,
       title: course.title,
       description: course.description,
-      start_date: course.start_date.strftime('%d/%m/%Y'),
-      end_date: course.end_date.strftime('%d/%m/%Y'),
+      start_date: course.start_date.strftime('%Y-%m-%d'),
+      end_date: course.end_date.strftime('%Y-%m-%d'),
       video_urls: course.video_urls
     }
   end
