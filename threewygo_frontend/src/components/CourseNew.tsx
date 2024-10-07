@@ -85,7 +85,7 @@ const CourseNew: React.FC = () => {
             mb={2}
           />
         ))}
-        <Button onClick={addVideoUrlField} colorScheme="blue" mt={2}>
+        <Button onClick={addVideoUrlField} colorScheme="blue">
           Adicionar URL de Vídeo
         </Button>
       </FormControl>

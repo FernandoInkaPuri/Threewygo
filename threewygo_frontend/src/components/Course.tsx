@@ -1,4 +1,4 @@
-import { Box, Text, Button, AspectRatio, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Text, Button, AspectRatio, Stack } from '@chakra-ui/react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -38,9 +38,13 @@ const Course: React.FC = () => {
 
   if (!course) return <div>Loading...</div>;
   return (
-    <Box p={4}>
-      <Text fontWeight="bold" textAlign="center" fontSize="5xl" my="2">{course.title}</Text>
-      <Text textAlign="center" fontSize="3xl" my={2}>{course.description}</Text>
+    <Box p={4} maxW="1000px" mx="auto">
+      <Text fontWeight="bold" textAlign="center" fontSize={{ base: '2xl', md: '5xl' }} my="2">
+        {course.title}
+      </Text>
+      <Text textAlign="center" fontSize={{ base: 'lg', md: '3xl' }} my={2}>
+        {course.description}
+      </Text>
       
       {course.video_urls.length > 0 && (
         <Box mt={4}>
@@ -54,9 +58,8 @@ const Course: React.FC = () => {
                 borderRadius="md" 
                 overflow="hidden" 
                 boxShadow="md"
-                width="60%"
-                mx="auto"
-                my={8}
+                width="100%"
+                my={4}
               >
                 <Text p={2} bg="gray.100" fontWeight="bold">Aula {index + 1}</Text>
                 <AspectRatio ratio={16 / 9}>
@@ -73,12 +76,14 @@ const Course: React.FC = () => {
         </Box>
       )}
 
-      <Button mt={4} colorScheme="red" onClick={handleDelete}>
-        Deletar Curso
-      </Button>
-      <Button mt={4} ml={4} onClick={() => navigate(`/course/edit/${id}`)}>
-        Editar Curso
-      </Button>
+      <Stack spacing={4} mt={4} direction={{ base: 'column', md: 'row' }}>
+        <Button colorScheme="red" onClick={handleDelete}>
+          Deletar Curso
+        </Button>
+        <Button onClick={() => navigate(`/course/edit/${id}`)}>
+          Editar Curso
+        </Button>
+      </Stack>
     </Box>
   );
 };
